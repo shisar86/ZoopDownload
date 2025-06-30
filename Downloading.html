@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Meta tags  -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>ZoopDownload</title>
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+
+    <!-- CSS Assets -->
+    <link rel="stylesheet" href="css/app.css" />
+
+    <!-- Javascript Assets -->
+    <script src="js/app.js" defer></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script>
+      /**
+       * THIS SCRIPT REQUIRED FOR PREVENT FLICKERING IN SOME BROWSERS
+       */
+      localStorage.getItem("_x_darkMode_on") === "true" &&
+        document.documentElement.classList.add("dark");
+    </script>
+  </head>
+
+  <body
+    x-data
+    x-bind="$store.global.documentBody"
+    class="is-header-blur navigation:horizontal"
+  >
+    <!-- Page Wrapper -->
+    <div
+      id="root"
+      class="min-h-100vh flex grow bg-slate-50 dark:bg-navy-900"
+      x-cloak
+    >
+      <!-- App Header Wrapper-->
+      <nav class="header print:hidden">
+        <!-- App Header  -->
+        <div
+          style="padding-left: 10px; padding-right: 10px"
+          class="header-container relative flex w-full bg-white dark:bg-navy-700 print:hidden sm:flex-col"
+        >
+          <!-- Header Items -->
+          <div
+            style="-webkit-app-region: drag"
+            class="flex w-full items-center justify-between sm:h-16"
+          >
+            <div class="hidden items-center space-x-2 sm:flex">
+              <a>
+                <img
+                  x-show="$store.global.isDarkModeEnabled"
+                  class="h-10 w-10 transition-transform duration-500 ease-in-out hover:rotate-[360deg]"
+                  src="images/app-logo.svg"
+                  alt="logo"
+                />
+                <img
+                  x-show="!$store.global.isDarkModeEnabled"
+                  class="h-10 w-10 transition-transform duration-500 ease-in-out hover:rotate-[360deg]"
+                  src="images/app-logo-light.svg"
+                  alt="logo"
+                />
+              </a>
+              <span
+                class="text-xl font-semibold uppercase text-slate-700 dark:text-navy-100"
+              >
+                ZoopDownload
+              </span>
+            </div>
+
+            <!-- Right: Header buttons -->
+            <div
+              style="-webkit-app-region: no-drag"
+              class="-mr-1.5 flex items-center space-x-2"
+            >
+              <!-- dark -->
+              <button
+                @click="$store.global.isDarkModeEnabled = !$store.global.isDarkModeEnabled"
+                class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
+              >
+                <svg
+                  x-show="$store.global.isDarkModeEnabled"
+                  x-transition:enter="transition-transform duration-200 ease-out absolute origin-top"
+                  x-transition:enter-start="scale-75"
+                  x-transition:enter-end="scale-100 static"
+                  class="h-6 w-6 text-amber-400"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M11.75 3.412a.818.818 0 01-.07.917 6.332 6.332 0 00-1.4 3.971c0 3.564 2.98 6.494 6.706 6.494a6.86 6.86 0 002.856-.617.818.818 0 011.1 1.047C19.593 18.614 16.218 21 12.283 21 7.18 21 3 16.973 3 11.956c0-4.563 3.46-8.31 7.925-8.948a.818.818 0 01.826.404z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  x-show="!$store.global.isDarkModeEnabled"
+                  x-transition:enter="transition-transform duration-200 ease-out absolute origin-top"
+                  x-transition:enter-start="scale-75"
+                  x-transition:enter-end="scale-100 static"
+                  class="h-6 w-6 text-amber-400"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+              <!-- minimize -->
+              <button
+                id="minimize"
+                class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
+              >
+                <div class="avatar h-8 w-8">
+                  <div
+                    class="is-initial mask is-squircle bg-warning text-base uppercase text-white"
+                  ></div>
+                </div>
+              </button>
+              <!-- close -->
+              <button
+                id="close"
+                x-ref="popperRef"
+                class="btn relative h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
+              >
+                <div class="avatar h-8 w-8">
+                  <div
+                    class="is-initial mask is-squircle bg-error text-base uppercase text-white"
+                  ></div>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div
+            class="h-px mx-0 bg-slate-200 dark:bg-navy-500"
+            style="padding-left: 1px"
+          ></div>
+          <div class="h-12 items-center space-x-2 sm:flex">
+            <button
+              onclick="document.location.href='index.html'"
+              class="btn space-x-1 font-medium text-slate-700 hover:bg-slate-300/20 active:bg-slate-300/25 dark:text-navy-100 dark:hover:bg-navy-300/20 dark:active:bg-navy-300/25"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M5 14.0585C5 13.0494 5 12.5448 5.22166 12.1141C5.44333 11.6833 5.8539 11.3901 6.67505 10.8035L10.8375 7.83034C11.3989 7.42938 11.6795 7.2289 12 7.2289C12.3205 7.2289 12.6011 7.42938 13.1625 7.83034L17.325 10.8035C18.1461 11.3901 18.5567 11.6833 18.7783 12.1141C19 12.5448 19 13.0494 19 14.0585V19C19 19.9428 19 20.4142 18.7071 20.7071C18.4142 21 17.9428 21 17 21H7C6.05719 21 5.58579 21 5.29289 20.7071C5 20.4142 5 19.9428 5 19V14.0585Z"
+                    fill="currentColor"
+                    fill-opacity="0.24"
+                  ></path>
+                  <path
+                    d="M3 12.3866C3 12.6535 3 12.7869 3.0841 12.8281C3.16819 12.8692 3.27352 12.7873 3.48418 12.6234L10.7721 6.95502C11.362 6.49625 11.6569 6.26686 12 6.26686C12.3431 6.26686 12.638 6.49625 13.2279 6.95502L20.5158 12.6234C20.7265 12.7873 20.8318 12.8692 20.9159 12.8281C21 12.7869 21 12.6535 21 12.3866V11.9782C21 11.4978 21 11.2576 20.8983 11.0497C20.7966 10.8418 20.607 10.6944 20.2279 10.3995L13.2279 4.95502C12.638 4.49625 12.3431 4.26686 12 4.26686C11.6569 4.26686 11.362 4.49625 10.7721 4.95502L3.77212 10.3995C3.39295 10.6944 3.20337 10.8418 3.10168 11.0497C3 11.2576 3 11.4978 3 11.9782V12.3866Z"
+                    fill="currentColor"
+                  ></path>
+                  <path
+                    d="M12.5 15H11.5C10.3954 15 9.5 15.8954 9.5 17V20.85C9.5 20.9328 9.56716 21 9.65 21H14.35C14.4328 21 14.5 20.9328 14.5 20.85V17C14.5 15.8954 13.6046 15 12.5 15Z"
+                    fill="CurrentColor"
+                  ></path>
+                  <rect
+                    x="16"
+                    y="5"
+                    width="2"
+                    height="4"
+                    rx="0.5"
+                    fill="CurrentColor"
+                  ></rect>
+                </g>
+              </svg>
+              <span>Home</span>
+            </button>
+            <button
+              onclick="document.location.href='NewDownload.html'"
+              class="btn space-x-1 font-medium text-slate-700 hover:bg-slate-300/20 active:bg-slate-300/25 dark:text-navy-100 dark:hover:bg-navy-300/20 dark:active:bg-navy-300/25"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M20 12C20 9.19974 20 7.79961 19.455 6.73005C18.9757 5.78924 18.2108 5.02433 17.27 4.54497C16.2004 4 14.8003 4 12 4C9.19974 4 7.79961 4 6.73005 4.54497C5.78924 5.02433 5.02433 5.78924 4.54497 6.73005C4 7.79961 4 9.19974 4 12V18C4 18.9428 4 19.4142 4.29289 19.7071C4.58579 20 5.05719 20 6 20H12C14.8003 20 16.2004 20 17.27 19.455C18.2108 18.9757 18.9757 18.2108 19.455 17.27C20 16.2004 20 14.8003 20 12Z"
+                    fill="currentColor"
+                    fill-opacity="0.24"
+                  ></path>
+                  <path
+                    d="M9 12L15 12"
+                    stroke="currentColor"
+                    stroke-width="1.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                  <path
+                    d="M12 9L12 15"
+                    stroke="currentColor"
+                    stroke-width="1.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </g>
+              </svg>
+              <span>New Download</span>
+            </button>
+            <button
+              onclick="document.location.href='Downloading.html'"
+              class="btn space-x-1 bg-primary/10 font-medium text-primary hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-accent-light/10 dark:text-accent-light dark:hover:bg-accent-light/20 dark:focus:bg-accent-light/20 dark:active:bg-accent-light/25"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="9"
+                    fill="currentColor"
+                    fill-opacity="0.24"
+                  ></circle>
+                  <path
+                    d="M12 5.3C12 5.15741 12 5.08611 12.0462 5.04182C12.0925 4.99753 12.1616 5.0005 12.2999 5.00643C13.4246 5.05465 14.5226 5.37351 15.5 5.93782C16.5641 6.5522 17.4478 7.43587 18.0622 8.5C18.6766 9.56413 19 10.7712 19 12C19 13.2288 18.6766 14.4359 18.0622 15.5C17.4478 16.5641 16.5641 17.4478 15.5 18.0622C14.4359 18.6766 13.2288 19 12 19C10.7712 19 9.56413 18.6766 8.5 18.0622C7.52259 17.4979 6.69743 16.7064 6.09335 15.7565C6.01906 15.6397 5.98191 15.5813 5.99716 15.5191C6.0124 15.4569 6.07414 15.4213 6.19763 15.35L11.85 12.0866C11.9232 12.0443 11.9598 12.0232 11.9799 11.9884C12 11.9536 12 11.9113 12 11.8268V5.3Z"
+                    fill="currentColor"
+                  ></path>
+                </g>
+              </svg>
+              <span> Downloading </span>
+            </button>
+            <button
+              onclick="document.location.href='Downloaded.html'"
+              class="btn space-x-1 font-medium text-slate-700 hover:bg-slate-300/20 active:bg-slate-300/25 dark:text-navy-100 dark:hover:bg-navy-300/20 dark:active:bg-navy-300/25"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M3 8C3 7.06812 3 6.60218 3.15224 6.23463C3.35523 5.74458 3.74458 5.35523 4.23463 5.15224C4.60218 5 5.06812 5 6 5H8.34315C9.16065 5 9.5694 5 9.93694 5.15224C10.3045 5.30448 10.5935 5.59351 11.1716 6.17157L13 8V11H3V8Z"
+                    fill="currentColor"
+                    fill-opacity="0.24"
+                  ></path>
+                  <path
+                    d="M3 11.2C3 10.0799 3 9.51984 3.21799 9.09202C3.40973 8.71569 3.71569 8.40973 4.09202 8.21799C4.51984 8 5.0799 8 6.2 8H17.8C18.9201 8 19.4802 8 19.908 8.21799C20.2843 8.40973 20.5903 8.71569 20.782 9.09202C21 9.51984 21 10.0799 21 11.2V15.8C21 16.9201 21 17.4802 20.782 17.908C20.5903 18.2843 20.2843 18.5903 19.908 18.782C19.4802 19 18.9201 19 17.8 19H6.2C5.0799 19 4.51984 19 4.09202 18.782C3.71569 18.5903 3.40973 18.2843 3.21799 17.908C3 17.4802 3 16.9201 3 15.8V11.2Z"
+                    fill="currentColor"
+                  ></path>
+                </g>
+              </svg>
+              <span>Downloads</span>
+            </button>
+            <button
+              onclick="document.location.href='About.html'"
+              class="btn space-x-1 font-medium text-slate-700 hover:bg-slate-300/20 active:bg-slate-300/25 dark:text-navy-100 dark:hover:bg-navy-300/20 dark:active:bg-navy-300/25"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <g>
+                  <g id="Layer_2" data-name="Layer 2">
+                    <circle
+                      cx="12"
+                      cy="12"
+                      fill="currentColor"
+                      r="10"
+                      data-original="#2196f3"
+                      class=""
+                    ></circle>
+                    <g fill="#fff">
+                      <circle
+                        cx="12"
+                        cy="7.38"
+                        r="1.25"
+                        fill="currentColor"
+                        data-original="#ffffff"
+                        class=""
+                      ></circle>
+                      <path
+                        d="m12 17.88a1 1 0 0 1 -1-1v-5a1 1 0 0 1 0-2h1a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1z"
+                        fill="#ffff"
+                        data-original="#ffffff"
+                        class=""
+                      ></path>
+                      <path
+                        d="m13 17.88h-2a1 1 0 0 1 0-2h2a1 1 0 1 1 0 2z"
+                        fill="#ffff"
+                        data-original="#ffffff"
+                        class=""
+                      ></path>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+              <span>About Us</span>
+            </button>
+          </div>
+        </div>
+      </nav>
+      <main class="main-content w-full flex justify-center items-center">
+        <div id="downloading" class="hidden card w-full h-full py-5">
+          <div class="flex grow flex-col items-center px-4 pb-5 sm:px-5">
+            <div class="avatar h-20 w-20">
+              <img class="" src="images/png/folder.png" alt="avatar" />
+            </div>
+            <h3
+              id="FileName"
+              class="pt-3 pb-5 text-lg font-medium text-slate-700 dark:text-navy-100"
+            ></h3>
+            <div class="grid grid-cols-8 w-full">
+              <div
+                class="progress h-2 bg-slate-150 dark:bg-navy-500"
+                style="
+                  border-bottom-right-radius: 0%;
+                  border-top-right-radius: 0;
+                "
+              >
+                <div
+                  id="p1"
+                  class="is-active relative bg-primary dark:bg-accent"
+                ></div>
+              </div>
+              <div
+                class="progress h-2 bg-slate-150 dark:bg-navy-500"
+                style="border-radius: 0"
+              >
+                <div id="p2" class="is-active relative bg-info"></div>
+              </div>
+              <div
+                class="progress h-2 bg-slate-150 dark:bg-navy-500"
+                style="border-radius: 0"
+              >
+                <div id="p3" class="is-active relative bg-success"></div>
+              </div>
+              <div
+                class="progress h-2 bg-slate-150 dark:bg-navy-500"
+                style="border-radius: 0"
+              >
+                <div id="p4" class="is-active relative bg-warning"></div>
+              </div>
+              <div
+                class="progress h-2 bg-slate-150 dark:bg-navy-500"
+                style="border-radius: 0"
+              >
+                <div id="p5" class="is-active relative bg-pink-600"></div>
+              </div>
+              <div
+                class="progress h-2 bg-slate-150 dark:bg-navy-500"
+                style="border-radius: 0"
+              >
+                <div id="p6" class="is-active relative bg-error"></div>
+              </div>
+              <div
+                class="progress h-2 bg-slate-150 dark:bg-navy-500"
+                style="border-radius: 0"
+              >
+                <div id="p7" class="is-active relative bg-secondary"></div>
+              </div>
+              <div
+                class="progress h-2 bg-slate-150 dark:bg-navy-500"
+                style="border-top-left-radius: 0; border-bottom-left-radius: 0"
+              >
+                <div id="p8" class="is-active relative bg-red-500"></div>
+              </div>
+            </div>
+            <h1 id="Percentage" class="px-5 text-3xl font-extrabold">
+              100.<span id="PercentageBase" class="text-base font-semibold"
+                >00</span
+              >%
+            </h1>
+            <div class="grid grid-cols-2 w-3/4 gap-5 py-5">
+              <div
+                class="alert flex overflow-hidden rounded-lg bg-warning/10 text-warning dark:bg-warning-light/15 dark:text-warning-light"
+              >
+                <div class="w-1.5 bg-warning"></div>
+                <div class="p-8 font-bold text-lg">
+                  <span id="downloadedSize"></span>/<span id="totalSize"></span>
+                </div>
+              </div>
+              <div
+                class="alert flex overflow-hidden rounded-lg bg-success/10 text-success dark:bg-success-light/15 dark:text-success-light"
+              >
+                <div class="w-1.5 bg-success"></div>
+                <div class="p-8 font-bold text-lg">
+                  SPEED: <span id="totalSpeed"></span>/s
+                </div>
+              </div>
+              <div
+                class="alert flex overflow-hidden rounded-lg bg-info/10 text-info dark:bg-info-light/15 dark:text-info-light"
+              >
+                <div class="w-1.5 bg-info"></div>
+                <div id="Elapsed" class="p-8 font-bold text-lg"></div>
+              </div>
+              <div
+                class="alert flex overflow-hidden rounded-lg bg-secondary/10 text-secondary dark:bg-secondary-light/15 dark:text-secondary-light"
+              >
+                <div class="w-1.5 bg-secondary"></div>
+                <div id="timeLeft" class="p-8 font-bold text-lg"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="notDownloading">Not</div>
+      </main>
+    </div>
+
+    <!-- 
+        This is a place for Alpine.js Teleport feature 
+        @see https://alpinejs.dev/directives/teleport
+      -->
+
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        Alpine.start();
+        var y = document.getElementById("downloading");
+        var n = document.getElementById("notDownloading");
+        console.log(localStorage.getItem("DownloadSet"));
+        if (localStorage.getItem("DownloadSet")) {
+          y.className = "card w-full h-full py-5";
+          n.className = "hidden";
+          document.getElementById("FileName").innerText =
+            localStorage.getItem("CurrentFName");
+          document.getElementById("totalSize").innerText =
+            localStorage.getItem("CurrentSize");
+        } else {
+          y.className = "hidden";
+          n.className = "visible";
+        }
+      });
+    </script>
+    <script src="js/sweetalert2.all.min.js"></script>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>

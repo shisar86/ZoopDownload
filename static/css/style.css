@@ -1,0 +1,122 @@
+root{
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+::-webkit-scrollbar {
+    width: 6px;
+    height: 0px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: #e4e4e4;
+    border-radius: 100px;
+  }
+  
+::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(180deg, #d0368a 0%, #708ad4 99%);
+    box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+    border-radius: 100px;
+  }
+  body{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image:url("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg")
+    /*background-image: url("https://4kwallpapers.com/images/wallpapers/3d-background-abstract-background-purple-background-spiral-6000x4000-8845.jpg");*/
+}
+.navbar
+{
+padding:0;
+background: rgba( 0, 0, 0, 0.6 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 14px );
+-webkit-backdrop-filter: blur( 14px );
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+height:5vh;
+}
+.navbar-brand
+{
+    font-size:15;
+    font-weight: bolder;
+    margin-top:-15;
+    padding:5;
+    color:white;
+}
+.navbar-brand:hover
+{
+    color:white;
+}
+li{
+    list-style: none;
+}
+.login {
+
+    height: 315px;
+   background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255,255,255,0.2);
+      border-left: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 5px 5px 30px rgba(0,0,0,0.2);
+    border-radius: 3px;
+  
+  }
+   .titlebar{
+    line-height: 55px;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: "Open Sans", sans-serif;
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255,255,255,0.2);
+      border-left: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 5px 5px 30px rgba(0,0,0,0.2);
+      margin-top: 0px;
+      
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+  .btn{
+    margin-top: 15px;
+    width: 270px;
+    text-align: center;
+    font-size: 14px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+    padding: 12px 0;
+  
+    color: #fff;
+    background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255,255,255,0.2);
+      border-left: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 5px 5px 30px rgba(0,0,0,0.2);
+  
+    text-transform: uppercase;
+    border: none;
+  
+    margin-bottom: 20px;
+  
+  }
+  .btn:hover
+  {
+    color: #ff78c2;
+  }
+  input{
+    color: white;
+    font-size: 14px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+background: rgba( 255, 255, 255, 0.05 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 11px );
+-webkit-backdrop-filter: blur( 11px );
+border-radius: 5px;
+height: 5vh;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+  }
+  ::-webkit-input-placeholder{
+    color:#d7d8da
+  }

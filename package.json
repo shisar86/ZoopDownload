@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "easydl": "^1.0.3",
+    "path": "^0.12.7",
+    "url": "^0.11.0",
+    "url-file-size": "^1.0.5-1",
+    "yarn": "^1.22.19"
+  },
+  "name": "LDM",
+  "version": "1.0.0",
+  "description": "Fastest Downloader",
+  "main": "main.js",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^22.3.27"
+  },
+  "scripts": {
+    "start": "electron ."
+  }
+}

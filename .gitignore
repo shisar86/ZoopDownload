@@ -1,0 +1,42 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Build output
+dist/
+build/
+
+# VSCode settings
+.vscode/
+
+# Electron
+*.asar
+
+# Environment files
+.env
+.env.*
+
+# Misc
+*.swp
+*.swo
+.idea/
+*.iml
+
+# Downloaded files
+*.crdownload
+
+# Backup files
+*.bak
+
+# Ignore status files
+*.download_status.json
